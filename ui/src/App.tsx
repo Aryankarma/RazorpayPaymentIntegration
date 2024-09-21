@@ -39,7 +39,7 @@ function App() {
     console.log({ payAmount, note });
 
     try {
-      const response = await axios.post("http://localhost:3000/create-order", {
+      const response = await axios.post("https://razorpaypaymentintegration.onrender.com/create-order", {
         payAmount,
         currency: "INR",
         note,
@@ -87,7 +87,7 @@ function App() {
             };
           
             try {
-              await axios.post("http://localhost:3000/paymentsuccess", paymentData);
+              await axios.post("https://razorpaypaymentintegration.onrender.com/paymentsuccess", paymentData);
               console.log("Transaction data sent to backend");
           
               // Navigate to success page

@@ -14,7 +14,7 @@ dotenv.config()
 
 app.use(
   cors({
-    origin: "*",
+    origin: "https://razorpay-payment-integration.vercel.app",
   })
 );
 
