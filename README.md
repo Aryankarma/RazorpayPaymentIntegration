@@ -1,14 +1,9 @@
-Here's the README.md in markdown format:
-
-```markdown
 # RazorPay Payment Integration
 
 This project demonstrates a full-stack implementation of RazorPay payment integration using React for the frontend and Express.js with Firebase for the backend.
 
 ## Project Structure
-
 ```
-RAZORPAYPAYMENTINTEGRATION/
 ├── server/
 │   ├── config/
 │   │   └── firebaseServiceAccount.json
