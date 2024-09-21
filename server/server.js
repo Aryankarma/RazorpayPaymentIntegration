@@ -1,35 +1,36 @@
-import express, { json } from 'express';
-import { connect } from 'mongoose';
-import cors from 'cors';
-import { config } from 'dotenv';
-import authRoutes from './routes/authRoutes.js';
+// server.js
 
-config();
+import express from 'express'
+import admin from 'firebase-admin'
+import serviceAccount from './config/firebaseServiceAccount.json' assert {type:"json"}
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
-app.use(json());
-
-// MongoDB connection
-connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log('Connected to MongoDB');
-}).catch((error) => {
-    console.log('Error connecting to MongoDB:', error);
+// Initialize Firebase Admin
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
 });
 
-// Test route
-app.get('/', (req, res) => {
-    res.send('API is running...');
+const db = admin.firestore();  // Firestore instance
+
+// Sample route to store data in Firestore
+app.post('/save-transaction', async (req, res) => {
+  try {
+    const { paymentId, amount } = req.body;
+
+    // Store transaction details in Firestore
+    await db.collection('transactions').add({
+      paymentId,
+      amount,
+      timestamp: admin.firestore.FieldValue.serverTimestamp(),
+    });
+
+    res.status(200).send('Transaction stored successfully');
+  } catch (error) {
+    res.status(500).send('Error storing transaction');
+  }
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(3000, () => {
+  console.log('Server running on port 3000');
 });
-
-app.use('/api/auth', authRoutes);
