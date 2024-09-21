@@ -6,7 +6,7 @@ const PaymentSuccess = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { paymentId, signatureId, orderId, notes, amount } = location.state || {};
+  const { paymentId, notes, amount } = location.state || {};
 
   // Redirect if paymentId is missing
   useEffect(() => {

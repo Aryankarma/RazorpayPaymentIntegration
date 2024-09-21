@@ -8,8 +8,6 @@ import { useNavigate } from "react-router-dom";
 function App() {
   const [amount, setAmount] = useState<number>(1);
   const [note, setNote] = useState<string>("");
-  const [paymentFailed, setPaymentFailed] = useState<boolean>(false);
-  const [transactionData, setTransactionData] = useState<any>(null); // State to store transaction data like order id, and payment id
   const [transactionDetails, setTransactionDetails] = useState<object>({}); // State to store transaction details like id and notes
   const [isScriptLoaded, setIsScriptLoaded] = useState(false);
 
@@ -122,14 +120,6 @@ function App() {
       console.error("Error initiating payment: ", error);
     }
   };
-
-  if (paymentFailed) {
-    return (
-      <h1 className="text-2xl">
-        Payment Failed, please refresh the page and try again!
-      </h1>
-    );
-  }
 
   if(!isScriptLoaded){
     return <h1 className="text-2xl"> Loading... </h1>
