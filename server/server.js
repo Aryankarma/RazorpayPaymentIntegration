@@ -3,7 +3,7 @@
 import express from "express";
 import admin from "firebase-admin";
 // import serviceAccount from "./config/firebaseServiceAccount.json" assert { type: "json" };
-import serviceAccount from '/etc/secrets/firebaseServiceAccount.json'; // for deployement
+import serviceAccount from '/etc/secrets/firebaseServiceAccount.json' assert { type: "json" }; // for deployement
 import cors from "cors";
 import Razorpay from "razorpay";
 import dotenv from 'dotenv'
